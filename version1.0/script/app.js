@@ -11,6 +11,9 @@ var fontSizeMax = 24;
 var fontSizeMin = 8;
 // 设置文本出现的时长范围
 var displayTime = 1000;
+// 初始化随机显示区域的坐标范围
+var displayAreaX = 0；
+var displayAreaY =0；
 //
 //
 //***************************************
@@ -20,8 +23,12 @@ window.onload = para;             //页面加载完成后开始执行
 
 function para() {
     mkItems();
+    getWidthAndHigth();
 }
 
+function getWidthAndHigth() {        //页面加载完成后，获取显示区域的宽和高
+
+}
 
  // 创建随机属性对象的流水线
 function mkItems() {
@@ -32,9 +39,25 @@ function mkItems() {
         items[i].font = chiceFont();          //分配随机字体
         items[i].fontColor = chiceColor();    //分配随机颜色
         items[i].fontSize = chiceSize();      //分配随机字体大小
+                                              //分配显示时长
         console.log(items[i]);
         showItem(items[i]);                   //在页面中显示这个元素
     }
+}
+
+function showItem(item) {
+    // 创建一个节点
+    // 设置节点nodeValue为对象的name
+    // 获取当前随机显示区域的尺寸范围
+    // 分配对象的相对坐标
+    // 设置节点 为隐藏属性
+    // 插入节点
+    // 淡入显示节点
+    // 开始计时，隐藏时间
+    // 隐藏节点
+    // 倒计时（淡出动画的时间）
+    // 删除节点
+
 }
 
 // 随机选择一个名字
