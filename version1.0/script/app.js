@@ -19,14 +19,14 @@ var displayAreaY = 0;
 //***************************************
 //
 
-window.onload = para;             //页面加载完成后开始执行
+window.onload = para; //页面加载完成后开始执行
 
 function para() {
-    mkItems();
     getWidthAndHigth();
+    mkItems();
 }
 
-function getWidthAndHigth() {        //页面加载完成后，获取显示区域的宽和高
+function getWidthAndHigth() { //页面加载完成后，获取显示区域的宽和高
     var randomArea = document.getElementsByClassName('randomArea')[0];
     displayAreaX = randomArea.clientWidth;
     displayAreaY = window.innerHeight * 0.618;
@@ -36,20 +36,34 @@ function getWidthAndHigth() {        //页面加载完成后，获取显示区�
 function mkItems() {
     var items = new Array();
     for (var i = 0; i < foods.length * 2; i++) {
-        items[i] = new Object();              //开始创建这个显示对象
-        items[i].name = chiceName();          //分配随机显示内容
-        items[i].font = chiceFont();          //分配随机字体
-        items[i].fontColor = chiceColor();    //分配随机颜色
-        items[i].fontSize = chiceSize();      //分配随机字体大小
-        items[i].showTime = setShowTime();    //分配显示时长
+        items[i] = new Object(); //开始创建这个显示对象
+        items[i].name = chiceName(); //分配随机显示内容
+        items[i].font = chiceFont(); //分配随机字体
+        items[i].fontColor = chiceColor(); //分配随机颜色
+        items[i].fontSize = chiceSize(); //分配随机字体大小
+        items[i].showTime = setShowTime(); //分配显示时长
         // console.log(items[i]);                //测试输出对象列表
-        showItem(items[i]);                   //在页面中显示这个元素
+        showItem(items[i]); //在页面中显示这个元素
     }
 }
 
+
+
 function showItem(item) {
-    // 创建一个节点
+    var domP = document.createElement('p');
+    var randomID = 'id' + Math.random()*10000000;
+    domP.setAttribute(id,randomID);// 创建一个节点
+    var txt = document.createTextNode(item.name);
     // 设置节点nodeValue为对象的name
+    var showArea = document.getElementsByClassName('randomArea')[0];
+    showArea.appendChild(domP);
+    domP.appendChild(txt);
+    domP.style.left = Math.floor(Math.random()*displayAreaX - 50) + 'px';
+    domP.style.top = Math.floor(Math.random()*displayAreaY) + 'px';
+    domP.style.color = item.fontColor;
+    setTimeout(function () {
+
+    }, item.showTime);
     // 获取当前随机显示区域的尺寸范围
     // 分配对象的相对坐标
     // 设置节点 为隐藏属性
@@ -91,4 +105,3 @@ function setShowTime() {
     var x = Math.floor(Math.random() * showTimeMax);
     return x;
 }
-
