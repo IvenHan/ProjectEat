@@ -11,6 +11,8 @@ var fontSizeMax = 24;
 var fontSizeMin = 8;
 // 设置文本出现的时长范围
 var showTimeMax = 1000;
+// 开始显示的时间
+// var whenShowTime = 1000;
 // 初始化随机显示区域的坐标范围
 var displayAreaX = 0;
 var displayAreaY = 0;
@@ -42,6 +44,7 @@ function mkItems() {
         items[i].fontColor = chiceColor(); //分配随机颜色
         items[i].fontSize = chiceSize(); //分配随机字体大小
         items[i].showTime = setShowTime(); //分配显示时长
+        // items[i].whenShow = setWhenShow(); //开始显示时间
         // console.log(items[i]);                //测试输出对象列表
         showItem(items[i]); //在页面中显示这个元素
     }
@@ -52,22 +55,24 @@ function mkItems() {
 function showItem(item) {
     var domP = document.createElement('p');
     var randomID = 'id' + Math.random()*10000000;
-    domP.setAttribute(id,randomID);// 创建一个节点
-    var txt = document.createTextNode(item.name);
-    // 设置节点nodeValue为对象的name
+    domP.setAttribute('id',randomID);   // 创建一个节点
+    var txt = document.createTextNode(item.name);   // 设置节点nodeValue为对象的name
     var showArea = document.getElementsByClassName('randomArea')[0];
-    showArea.appendChild(domP);
-    domP.appendChild(txt);
+    showArea.appendChild(domP);     //插入节点 <p>
+    domP.appendChild(txt);      //在节点上插入  nodeValue
     domP.style.left = Math.floor(Math.random()*displayAreaX - 50) + 'px';
-    domP.style.top = Math.floor(Math.random()*displayAreaY) + 'px';
-    domP.style.color = item.fontColor;
-    setTimeout(function () {
+    domP.style.top = Math.floor(Math.random()*displayAreaY) + 'px';     //为节点分配随机坐标
+    domP.style.color = item.fontColor;      //为节点文字分配的灰度颜色
 
+
+    // 按照显示时间先后顺序删除节点
+    setTimeout(function () {
+        var parent = document.getElementsByClassName('randomArea')[0];
+        var child = document.getElementById(randomID);
+        parent.removeChild(child);
     }, item.showTime);
-    // 获取当前随机显示区域的尺寸范围
-    // 分配对象的相对坐标
-    // 设置节点 为隐藏属性
-    // 插入节点
+
+
     // 淡入显示节点
     // 开始计时，隐藏时间
     // 隐藏节点
